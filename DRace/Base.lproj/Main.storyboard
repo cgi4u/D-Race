@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="POe-Yz-CLA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="POe-Yz-CLA">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -72,7 +72,7 @@
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96385031938552856" green="0.76099985837936401" blue="0.74899119138717651" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="FxK-M9-T4F" firstAttribute="centerX" secondItem="RPn-D4-1wa" secondAttribute="centerX" id="GlF-HM-EYR"/>
                                     <constraint firstItem="lXD-s5-oyC" firstAttribute="centerX" secondItem="RPn-D4-1wa" secondAttribute="centerX" id="Oze-EC-obD"/>
@@ -583,11 +583,20 @@
                                 <rect key="frame" x="169" y="315" width="37" height="37"/>
                                 <color key="color" red="0.9602620006" green="0.76108413929999996" blue="0.74901062249999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </activityIndicatorView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading" translatesAutoresizingMaskIntoConstraints="NO" id="ceC-Uu-OLa">
+                                <rect key="frame" x="37" y="20" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="T5W-SY-CtX"/>
+                                    <constraint firstAttribute="width" constant="300" id="n2u-TS-YCt"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.76480761210000003" blue="0.74700005169999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="Kmt-jL-C0E" firstAttribute="centerY" secondItem="cex-zt-TDc" secondAttribute="centerY" id="2IW-l2-Vbo"/>
+                            <constraint firstItem="ceC-Uu-OLa" firstAttribute="top" secondItem="cLf-mp-5SX" secondAttribute="top" id="5bc-OR-mvv"/>
                             <constraint firstItem="Kmt-jL-C0E" firstAttribute="centerX" secondItem="cex-zt-TDc" secondAttribute="centerX" id="Ohm-k0-c35"/>
+                            <constraint firstItem="ceC-Uu-OLa" firstAttribute="centerX" secondItem="cex-zt-TDc" secondAttribute="centerX" id="h0G-4X-CUH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cLf-mp-5SX"/>
                     </view>
@@ -902,8 +911,8 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="292" id="2wK-gR-mpp"/>
                                     <constraint firstItem="IER-zz-J3k" firstAttribute="top" secondItem="JW5-Jq-uAx" secondAttribute="bottom" id="4yr-Kz-rlT"/>
@@ -1019,12 +1028,13 @@
     <resources>
         <image name="data" width="30" height="30"/>
         <image name="exercise" width="406" height="406"/>
+        <image name="loading" width="300" height="300"/>
         <image name="ranking" width="30" height="30"/>
         <image name="renew" width="30" height="30"/>
         <image name="user" width="30" height="30"/>
         <image name="weight" width="406" height="406"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ifK-mH-Ybh"/>
+        <segue reference="Ume-sp-JxH"/>
     </inferredMetricsTieBreakers>
 </document>
