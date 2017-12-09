@@ -18,9 +18,13 @@ var handle:DatabaseHandle?
 
 class AuthViewController: UIViewController, LoginButtonDelegate, GIDSignInUIDelegate{
     @IBOutlet weak var activityLoadingSpin: UIActivityIndicatorView!
+    @IBOutlet weak var logoImg: UIImageView!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadingIndicator.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        loadingIndicator.startAnimating()
         
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if let _user = user{
@@ -30,6 +34,7 @@ class AuthViewController: UIViewController, LoginButtonDelegate, GIDSignInUIDele
                 lossRankRef = Database.database().reference().child("lossWeightRanking")
                 
                 Database.database().reference().child("users").observeSingleEvent(of: .value, with: { (DataSnapshot) in
+                    self.loadingIndicator.stopAnimating()
                     if DataSnapshot.hasChild(userID!){
                         self.performSegue(withIdentifier: "moveToHome", sender: nil)
                     }
@@ -38,6 +43,8 @@ class AuthViewController: UIViewController, LoginButtonDelegate, GIDSignInUIDele
                     }
                 })
             } else {
+                self.logoImg.isHidden = false
+                
                 //FaceBook Signin
                 let FBloginButton = LoginButton(frame: CGRect(x: 0, y: 0, width: 290, height: 40),readPermissions: [ .publicProfile ])
                 FBloginButton.center.x = self.view.center.x
@@ -55,6 +62,7 @@ class AuthViewController: UIViewController, LoginButtonDelegate, GIDSignInUIDele
                 GGloginButton.style = GIDSignInButtonStyle.wide
                 
                 self.view.addSubview(GGloginButton)
+                self.loadingIndicator.stopAnimating()
             }
         }
     }

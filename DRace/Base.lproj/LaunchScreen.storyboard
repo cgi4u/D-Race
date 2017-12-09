@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,30 +20,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading" translatesAutoresizingMaskIntoConstraints="NO" id="XQR-Ms-262">
-                                <rect key="frame" x="37" y="20" width="300" height="300"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main" translatesAutoresizingMaskIntoConstraints="NO" id="XQR-Ms-262">
+                                <rect key="frame" x="27.5" y="184" width="319" height="319"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="EWj-7d-NCw"/>
-                                    <constraint firstAttribute="width" constant="300" id="bl2-JU-Jwu"/>
+                                    <constraint firstAttribute="width" secondItem="XQR-Ms-262" secondAttribute="height" multiplier="1:1" id="vSp-2H-xED"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading......" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sol-x4-mk7">
-                                <rect key="frame" x="87" y="360" width="200" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="IMk-Cb-5Bt"/>
-                                    <constraint firstAttribute="height" constant="50" id="U34-Hl-b1b"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.76480761210000003" blue="0.74700005169999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="XQR-Ms-262" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="AGy-lt-fJZ"/>
-                            <constraint firstItem="XQR-Ms-262" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="GRn-Np-jY5"/>
-                            <constraint firstItem="Sol-x4-mk7" firstAttribute="top" secondItem="XQR-Ms-262" secondAttribute="bottom" constant="40" id="eaW-qc-n6h"/>
-                            <constraint firstItem="Sol-x4-mk7" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="iWA-4w-UYD"/>
+                            <constraint firstItem="XQR-Ms-262" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="4KB-5Z-GW5"/>
+                            <constraint firstItem="XQR-Ms-262" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="6uI-WP-YWf"/>
+                            <constraint firstItem="XQR-Ms-262" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.85" id="YxX-6A-VDM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -52,6 +42,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="loading" width="300" height="300"/>
+        <image name="main" width="300" height="300"/>
     </resources>
 </document>

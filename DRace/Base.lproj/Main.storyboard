@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="POe-Yz-CLA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="POe-Yz-CLA">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -579,29 +580,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Kmt-jL-C0E">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Kmt-jL-C0E">
                                 <rect key="frame" x="169" y="315" width="37" height="37"/>
                                 <color key="color" red="0.9602620006" green="0.76108413929999996" blue="0.74901062249999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </activityIndicatorView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading" translatesAutoresizingMaskIntoConstraints="NO" id="ceC-Uu-OLa">
-                                <rect key="frame" x="37" y="20" width="300" height="300"/>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main" translatesAutoresizingMaskIntoConstraints="NO" id="ceC-Uu-OLa">
+                                <rect key="frame" x="28" y="20" width="318.5" height="319"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="T5W-SY-CtX"/>
-                                    <constraint firstAttribute="width" constant="300" id="n2u-TS-YCt"/>
+                                    <constraint firstAttribute="width" secondItem="ceC-Uu-OLa" secondAttribute="height" multiplier="1:1" id="OZR-po-oAb"/>
                                 </constraints>
                             </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="OEA-EY-wQD">
+                                <rect key="frame" x="177" y="333.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.76480761210000003" blue="0.74700005169999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="Kmt-jL-C0E" firstAttribute="centerY" secondItem="cex-zt-TDc" secondAttribute="centerY" id="2IW-l2-Vbo"/>
+                            <constraint firstItem="OEA-EY-wQD" firstAttribute="centerX" secondItem="cLf-mp-5SX" secondAttribute="centerX" id="2v2-7B-yCC"/>
                             <constraint firstItem="ceC-Uu-OLa" firstAttribute="top" secondItem="cLf-mp-5SX" secondAttribute="top" id="5bc-OR-mvv"/>
                             <constraint firstItem="Kmt-jL-C0E" firstAttribute="centerX" secondItem="cex-zt-TDc" secondAttribute="centerX" id="Ohm-k0-c35"/>
+                            <constraint firstItem="ceC-Uu-OLa" firstAttribute="width" secondItem="cex-zt-TDc" secondAttribute="width" multiplier="0.85" id="Zj7-iW-GVl"/>
                             <constraint firstItem="ceC-Uu-OLa" firstAttribute="centerX" secondItem="cex-zt-TDc" secondAttribute="centerX" id="h0G-4X-CUH"/>
+                            <constraint firstItem="OEA-EY-wQD" firstAttribute="centerY" secondItem="cLf-mp-5SX" secondAttribute="centerY" id="ygd-23-1Gw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cLf-mp-5SX"/>
                     </view>
                     <connections>
                         <outlet property="activityLoadingSpin" destination="Kmt-jL-C0E" id="6gK-gX-gSp"/>
+                        <outlet property="loadingIndicator" destination="OEA-EY-wQD" id="Zev-1G-15S"/>
+                        <outlet property="logoImg" destination="ceC-Uu-OLa" id="5sV-ob-oQK"/>
                         <segue destination="Z5d-5g-vQS" kind="show" identifier="moveToHome" id="Ume-sp-JxH">
                             <nil key="action"/>
                         </segue>
@@ -1028,7 +1036,7 @@
     <resources>
         <image name="data" width="30" height="30"/>
         <image name="exercise" width="406" height="406"/>
-        <image name="loading" width="300" height="300"/>
+        <image name="main" width="300" height="300"/>
         <image name="ranking" width="30" height="30"/>
         <image name="renew" width="30" height="30"/>
         <image name="user" width="30" height="30"/>
