@@ -21,6 +21,9 @@ class AuthViewController: UIViewController, LoginButtonDelegate, GIDSignInUIDele
     @IBOutlet weak var logoImg: UIImageView!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var imgCenterY: NSLayoutConstraint!
+    @IBOutlet weak var imgTop: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadingIndicator.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
@@ -43,14 +46,40 @@ class AuthViewController: UIViewController, LoginButtonDelegate, GIDSignInUIDele
                     }
                 })
             } else {
+                self.loadingIndicator.stopAnimating()
                 self.logoImg.isHidden = false
                 
+                self.imgCenterY.isActive = false
+                self.imgTop.isActive = true
+                UIView.animate(withDuration: 1, animations: {
+                    self.view.layoutIfNeeded()
+                }, completion: {finished in
+                    
+                    let FBloginButton = LoginButton(frame: CGRect(x: 0, y: 0, width: 290, height: 40),readPermissions: [ .publicProfile ])
+                    FBloginButton.center.x = self.view.center.x
+                    FBloginButton.center.y = self.view.center.y * 1.25
+                    FBloginButton.delegate = self;
+                    self.view.addSubview(FBloginButton)
+                    
+                    GIDSignIn.sharedInstance().uiDelegate = self
+                    //GIDSignIn.sharedInstance().signIn()
+                    
+                    let GGloginButton = GIDSignInButton(frame: CGRect(x: 0, y: 0, width: 300, height: 50))
+                    GGloginButton.center.x = self.view.center.x
+                    GGloginButton.center.y = FBloginButton.center.y + 50
+                    GGloginButton.style = GIDSignInButtonStyle.wide
+                    
+                    self.view.addSubview(GGloginButton)
+                })
+                
+                /*
                 //FaceBook Signin
                 let FBloginButton = LoginButton(frame: CGRect(x: 0, y: 0, width: 290, height: 40),readPermissions: [ .publicProfile ])
                 FBloginButton.center.x = self.view.center.x
                 FBloginButton.center.y = self.view.center.y * 1.25
                 FBloginButton.delegate = self;
                 self.view.addSubview(FBloginButton)
+ 
                 
                 //Google Signin
                 GIDSignIn.sharedInstance().uiDelegate = self
@@ -62,9 +91,16 @@ class AuthViewController: UIViewController, LoginButtonDelegate, GIDSignInUIDele
                 GGloginButton.style = GIDSignInButtonStyle.wide
                 
                 self.view.addSubview(GGloginButton)
-                self.loadingIndicator.stopAnimating()
+                
+ 
+                */
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.imgCenterY.isActive = false
+        self.imgTop.isActive = true
     }
     
     func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {

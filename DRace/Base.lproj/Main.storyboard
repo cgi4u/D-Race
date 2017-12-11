@@ -585,7 +585,7 @@
                                 <color key="color" red="0.9602620006" green="0.76108413929999996" blue="0.74901062249999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </activityIndicatorView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main" translatesAutoresizingMaskIntoConstraints="NO" id="ceC-Uu-OLa">
-                                <rect key="frame" x="28" y="20" width="318.5" height="319"/>
+                                <rect key="frame" x="28" y="184.5" width="318.5" height="318.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ceC-Uu-OLa" secondAttribute="height" multiplier="1:1" id="OZR-po-oAb"/>
                                 </constraints>
@@ -598,16 +598,24 @@
                         <constraints>
                             <constraint firstItem="Kmt-jL-C0E" firstAttribute="centerY" secondItem="cex-zt-TDc" secondAttribute="centerY" id="2IW-l2-Vbo"/>
                             <constraint firstItem="OEA-EY-wQD" firstAttribute="centerX" secondItem="cLf-mp-5SX" secondAttribute="centerX" id="2v2-7B-yCC"/>
-                            <constraint firstItem="ceC-Uu-OLa" firstAttribute="top" secondItem="cLf-mp-5SX" secondAttribute="top" id="5bc-OR-mvv"/>
+                            <constraint firstItem="ceC-Uu-OLa" firstAttribute="top" secondItem="cLf-mp-5SX" secondAttribute="top" id="FeJ-Ff-w8T"/>
                             <constraint firstItem="Kmt-jL-C0E" firstAttribute="centerX" secondItem="cex-zt-TDc" secondAttribute="centerX" id="Ohm-k0-c35"/>
                             <constraint firstItem="ceC-Uu-OLa" firstAttribute="width" secondItem="cex-zt-TDc" secondAttribute="width" multiplier="0.85" id="Zj7-iW-GVl"/>
                             <constraint firstItem="ceC-Uu-OLa" firstAttribute="centerX" secondItem="cex-zt-TDc" secondAttribute="centerX" id="h0G-4X-CUH"/>
+                            <constraint firstItem="ceC-Uu-OLa" firstAttribute="centerY" secondItem="cLf-mp-5SX" secondAttribute="centerY" id="mtv-Gj-lwX"/>
                             <constraint firstItem="OEA-EY-wQD" firstAttribute="centerY" secondItem="cLf-mp-5SX" secondAttribute="centerY" id="ygd-23-1Gw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cLf-mp-5SX"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="FeJ-Ff-w8T"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="activityLoadingSpin" destination="Kmt-jL-C0E" id="6gK-gX-gSp"/>
+                        <outlet property="imgCenterY" destination="mtv-Gj-lwX" id="cwm-7S-xD4"/>
+                        <outlet property="imgTop" destination="FeJ-Ff-w8T" id="5vX-b4-QUS"/>
                         <outlet property="loadingIndicator" destination="OEA-EY-wQD" id="Zev-1G-15S"/>
                         <outlet property="logoImg" destination="ceC-Uu-OLa" id="5sV-ob-oQK"/>
                         <segue destination="Z5d-5g-vQS" kind="show" identifier="moveToHome" id="Ume-sp-JxH">
