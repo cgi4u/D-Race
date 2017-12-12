@@ -11,14 +11,6 @@ import Firebase
 import FirebaseDatabase
 
 class RenewDataModel {
-    /*let userID:String
-    let userRef:DatabaseReference
-    
-    init(uid:String){
-        userID = uid
-        userRef = Database.database().reference().child(uid)
-    }*/
-    
     //Save exercise time from user input to the FireBase database
     func saveExercise(exerciseMin:Int){
         let curDate = CustomDateFormatter.getCurDate()
@@ -30,8 +22,7 @@ class RenewDataModel {
                 userRef?.child("exerciseList").child(curDate).setValue(exerciseMin)
                 
                 //Get group number
-                let group = DataSnapshot.childSnapshot(forPath: "group").value
-                exerciseRankRef?.child("\(group as! Int)").child(userID!).setValue(exerciseMin)
+                exerciseRankRef?.child(userID!).setValue(exerciseMin)
             }
             else{   //If the record exists, add new value to it
                 //Get current exercising time, and add new one to that
@@ -42,8 +33,7 @@ class RenewDataModel {
                 userRef?.child("exerciseList/" + curDate).setValue(newExercise)
                 
                 //Get group number
-                let group = DataSnapshot.childSnapshot(forPath: "group").value
-                exerciseRankRef?.child("\(group as! Int)").child(userID!).setValue(newExercise)
+                exerciseRankRef?.child(userID!).setValue(newExercise)
             }
             
             userRef?.child("currentUpdate").setValue(curDate)
@@ -62,8 +52,7 @@ class RenewDataModel {
             let month = CustomDateFormatter.getCurMonth()
             userRef?.child("lossWeight/" + month).setValue("\(lossWeight)")
             
-            let group = DataSnapshot.childSnapshot(forPath: "group").value
-            lossRankRef?.child("\(group as! Int)").child(userID!).setValue("\(lossWeight)")
+            lossRankRef?.child(userID!).setValue("\(lossWeight)")
             
         })
     }
@@ -76,6 +65,8 @@ class RenewDataModel {
             for i in 1...15 {
                 if dWeight >= Double(i-1) * 10.0 && dWeight < Double(i) * 10.0 {
                     userRef?.child("group").setValue(i)
+                    groupRef = Database.database().reference().child("groups/\(i)")
+                    break
                 }
             }
         }

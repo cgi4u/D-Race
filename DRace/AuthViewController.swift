@@ -13,8 +13,8 @@ import FirebaseDatabase
 import FacebookLogin
 import GoogleSignIn
 
-var ref:DatabaseReference?
-var handle:DatabaseHandle?
+//var ref:DatabaseReference?
+//var handle:DatabaseHandle?
 
 class AuthViewController: UIViewController, LoginButtonDelegate, GIDSignInUIDelegate{
     @IBOutlet weak var activityLoadingSpin: UIActivityIndicatorView!
@@ -24,21 +24,25 @@ class AuthViewController: UIViewController, LoginButtonDelegate, GIDSignInUIDele
     @IBOutlet weak var imgCenterY: NSLayoutConstraint!
     @IBOutlet weak var imgTop: NSLayoutConstraint!
     
+    var exerciseRankRef:DatabaseReference?
+    var lossRankRef:DatabaseReference?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadingIndicator.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        loadingIndicator.transform = CGAffineTransform(scaleX: 3.0, y: 3.0)
         loadingIndicator.startAnimating()
         
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if let _user = user{
                 userID = _user.uid
                 userRef = Database.database().reference().child("users/" + (Auth.auth().currentUser?.uid)!)
-                exerciseRankRef = Database.database().reference().child("exerciseRanking")
-                lossRankRef = Database.database().reference().child("lossWeightRanking")
                 
                 Database.database().reference().child("users").observeSingleEvent(of: .value, with: { (DataSnapshot) in
                     self.loadingIndicator.stopAnimating()
                     if DataSnapshot.hasChild(userID!){
+                        let group = DataSnapshot.childSnapshot(forPath: userID! + "/group").value
+                        groupRef = Database.database().reference().child("groups/\(group as! Int)")
+                        
                         self.performSegue(withIdentifier: "moveToHome", sender: nil)
                     }
                     else{
@@ -71,29 +75,6 @@ class AuthViewController: UIViewController, LoginButtonDelegate, GIDSignInUIDele
                     
                     self.view.addSubview(GGloginButton)
                 })
-                
-                /*
-                //FaceBook Signin
-                let FBloginButton = LoginButton(frame: CGRect(x: 0, y: 0, width: 290, height: 40),readPermissions: [ .publicProfile ])
-                FBloginButton.center.x = self.view.center.x
-                FBloginButton.center.y = self.view.center.y * 1.25
-                FBloginButton.delegate = self;
-                self.view.addSubview(FBloginButton)
- 
-                
-                //Google Signin
-                GIDSignIn.sharedInstance().uiDelegate = self
-                //GIDSignIn.sharedInstance().signIn()
-                
-                let GGloginButton = GIDSignInButton(frame: CGRect(x: 0, y: 0, width: 300, height: 50))
-                GGloginButton.center.x = self.view.center.x
-                GGloginButton.center.y = FBloginButton.center.y + 50
-                GGloginButton.style = GIDSignInButtonStyle.wide
-                
-                self.view.addSubview(GGloginButton)
-                
- 
-                */
             }
         }
     }
