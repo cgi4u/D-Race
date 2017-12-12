@@ -15,7 +15,7 @@ var weightList = [String]()
 
 
 class WeightRecordController: UITableViewController {
-    
+    /*
     //make connection to the firebase database
     let user = Auth.auth().currentUser
     
@@ -63,6 +63,6 @@ class WeightRecordController: UITableViewController {
         
         return cell
     }
-    
+    */
 }
 

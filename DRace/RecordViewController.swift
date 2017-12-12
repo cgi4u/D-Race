@@ -13,7 +13,6 @@ import FirebaseDatabase
 import FirebaseAuth
 
 class RecordViewController: UIViewController {
-    
     @IBOutlet weak var exerciseValue: UILabel!
     @IBOutlet weak var beforeExerciseValue: UILabel!
     
@@ -40,20 +39,6 @@ class RecordViewController: UIViewController {
                 
                 //Calculate hout/minute
                 let minute = DataSnapshot.childSnapshot(forPath: "exerciseList").childSnapshot(forPath: date).value as! Int
-                /*let hour = minute / 60
-                minute = minute % 60
-                
-                //Text formatting
-                var labelText = ""
-                if hour != 0{
-                    labelText += "\(hour)시간"
-                }
-                if minute != 0{
-                    if !labelText.isEmpty{
-                        labelText += " "
-                    }
-                    labelText += "\(minute)분"
-                }*/
                 
                 self.exerciseValue.text = CustomTimeFormatter.time(rawMinute: minute)
             }
@@ -69,20 +54,6 @@ class RecordViewController: UIViewController {
                 
                 //Calculate hout/minute
                 let minute = DataSnapshot.childSnapshot(forPath: "exerciseList").childSnapshot(forPath:yesterday).value as! Int
-                /*let hour = minute / 60
-                minute = minute % 60
-                
-                //Text formatting
-                var labelText = ""
-                if hour != 0{
-                    labelText += "\(hour)시간"
-                }
-                if minute != 0{
-                    if !labelText.isEmpty{
-                        labelText += " "
-                    }
-                    labelText += "\(minute)분"
-                }*/
                 
                 self.beforeExerciseValue.text = CustomTimeFormatter.time(rawMinute: minute)
             }
@@ -104,10 +75,7 @@ class RecordViewController: UIViewController {
             }
         }
         
-        userRef?.observeSingleEvent(of: .value, with: { (DataSnapshot) in
-            self.group = DataSnapshot.childSnapshot(forPath: "group").value as! Int
-            self.getMaxData()
-        })
+        self.getMaxData()
     }
     
     
@@ -116,8 +84,8 @@ class RecordViewController: UIViewController {
     
     var group = 0
     func getMaxData(){
-        exerciseRankRef?.child("\(group)").observe(.value) { (DataSnapshot) in
-            let exerciseRankingQuery = exerciseRankRef?.child("\(self.group)").queryOrderedByValue()
+        exerciseRankRef?.observe(.value) { (DataSnapshot) in
+            let exerciseRankingQuery = exerciseRankRef?.queryOrderedByValue()
             exerciseRankingQuery?.observeSingleEvent(of:.value, with:{ (DataSnapshot) in
                 for child in DataSnapshot.children.reversed(){
                     let childString = "\(child)"
@@ -128,8 +96,8 @@ class RecordViewController: UIViewController {
             })
         }
         
-        lossRankRef?.child("\(group)").observe(.value) { (DataSnapshot) in
-            let lossRankingQuery = lossRankRef?.child("\(self.group)").queryOrderedByValue()
+        lossRankRef?.observe(.value) { (DataSnapshot) in
+            let lossRankingQuery = lossRankRef?.queryOrderedByValue()
             lossRankingQuery?.observeSingleEvent(of:.value, with:{ (DataSnapshot) in
                 for child in DataSnapshot.children.reversed(){
                     let childString = "\(child)"

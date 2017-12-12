@@ -10,53 +10,51 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-
 class RankingScreenViewController: UITableViewController{
     
     var userExerciseRanking: [String: Int] = [:]
-    var sortedExerciseTime:[String] = []
+    var sortedItems:[String] = []
     
-    /*
-    let exerciseRankingRef = Database.database().reference().child("exerciseRanking")
-    let lossRankingRef = Database.database().reference().child("lossWeightRanking")
-    let userRef = Database.database().reference().child((Auth.auth().currentUser?.uid)!)
-    */
- 
-    var group = 0
+    var mode = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userRef?.observeSingleEvent(of: .value, with: { (DataSnapshot) in
-            self.group = DataSnapshot.childSnapshot(forPath: "group").value as! Int
-            self.getRankingData()
-        })
+        getRankingData(rankRef:exerciseRankRef)
     }
     
-    /*
-    var curHandle:UInt = 0
-    var handleAssigned = false
-    */
+    @IBOutlet weak var exerciseButton: UIBarButtonItem!
+    @IBAction func exerciseRankingMode(_ sender: Any) {
+        lossRankRef?.removeAllObservers()
+        getRankingData(rankRef:exerciseRankRef)
+        mode = 0
+        
+        exerciseButton.isEnabled = false
+        lossWeightButton.isEnabled = true
+    }
+    
+    @IBOutlet weak var lossWeightButton: UIBarButtonItem!
+    @IBAction func lossWeightRankingMode(_ sender: Any) {
+        exerciseRankRef?.removeAllObservers()
+        getRankingData(rankRef: lossRankRef)
+        mode = 1
+        
+        exerciseButton.isEnabled = true
+        lossWeightButton.isEnabled = false
+    }
     
     var userIdx = -1
-    func getRankingData(){
-        /*if handleAssigned{
-            exerciseRankRef?.child("\(self.group)").removeObserver(withHandle: curHandle)
-        }
-        else{
-            handleAssigned = true
-        }*/
-
-        exerciseRankRef?.child("\(self.group)").observe(.value) { (DataSnapshot) in
-            let exerciseRankingQuery = exerciseRankRef?.child("\(self.group)").queryOrderedByValue()
-            exerciseRankingQuery?.observeSingleEvent(of:.value, with:{ (DataSnapshot) in
-                self.sortedExerciseTime.removeAll()
+    func getRankingData(rankRef:DatabaseReference?){
+        rankRef?.observe(.value) { (DataSnapshot) in
+            let RankingQuery = rankRef?.queryOrderedByValue()
+            RankingQuery?.observeSingleEvent(of:.value, with:{ (DataSnapshot) in
+                self.sortedItems.removeAll()
                 
                 var idx = 0
                 for child in DataSnapshot.children.reversed(){
                     let childString = "\(child)"
                     let childComponent = childString.components(separatedBy: " ")
-                    self.sortedExerciseTime.append(childComponent[2])
+                    self.sortedItems.append(childComponent[2])
                     
                     if childComponent[1].components(separatedBy: CharacterSet(charactersIn: "()"))[1] == userID{
                         self.userIdx = idx
@@ -66,9 +64,6 @@ class RankingScreenViewController: UITableViewController{
                 self.tableView.reloadData()
             })
         }
-        
-        /*print(newHandle!)
-        curHandle = newHandle!*/
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,7 +71,7 @@ class RankingScreenViewController: UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sortedExerciseTime.count
+        return sortedItems.count
     }
     
     
@@ -84,7 +79,14 @@ class RankingScreenViewController: UITableViewController{
         let cell = tableView.dequeueReusableCell(withIdentifier: "RankingItem", for: indexPath) as! RankingItem
         
         cell.rankLabel?.text = "\(indexPath.row + 1)위"
-        cell.valueLabel?.text = CustomTimeFormatter.time(rawMinuteS: sortedExerciseTime[indexPath.row])
+        
+        if (mode == 0){
+            cell.valueLabel?.text = CustomTimeFormatter.time(rawMinuteS: sortedItems[indexPath.row])
+        }
+        else{
+            cell.valueLabel?.text = sortedItems[indexPath.row] + " kg"
+        }
+        
         if (userIdx == indexPath.row){
             cell.messageLabel?.text = "당신의 순위입니다!"
         }
@@ -94,7 +96,6 @@ class RankingScreenViewController: UITableViewController{
         
         return cell
     }
-
 }
 
 class RankingItem:UITableViewCell{

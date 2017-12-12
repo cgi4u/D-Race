@@ -10,6 +10,12 @@ import Foundation
 import FirebaseDatabase
 
 var userRef:DatabaseReference?
+var groupRef:DatabaseReference?{
+    didSet{
+        exerciseRankRef = groupRef?.child("exerciseRanking")
+        lossRankRef = groupRef?.child("lossWeightRanking")
+    }
+}
 var exerciseRankRef:DatabaseReference?
 var lossRankRef:DatabaseReference?
 var userID:String?
